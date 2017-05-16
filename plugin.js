@@ -113,7 +113,6 @@ module.exports = (config) => {
 
         // attach methods to Chat
         return {
-            namespace,
             extends: {
                 Chat: extension
             }
