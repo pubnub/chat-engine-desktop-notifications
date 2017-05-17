@@ -6,7 +6,7 @@ module.exports = (config) => {
     // request permission on page load
     document.addEventListener('DOMContentLoaded', function () {
       if (!Notification) {
-        alert('Desktop notifications not available in your browser. Try Chromium.'); 
+        alert('Desktop notifications not available in your browser. Try Chromium.');
         return;
       }
 
@@ -19,11 +19,11 @@ module.exports = (config) => {
     function notifyMe(title, icon, body, callback) {
 
       if(lastNotification) {
-        
+
         lastNotification.close();
         lastNotification = false;
 
-      } 
+      }
 
       if (Notification.permission !== "granted") {
         Notification.requestPermission();
@@ -41,8 +41,8 @@ module.exports = (config) => {
     }
 
     // Set the name of the hidden property and the change event for visibility
-    var hidden, visibilityChange; 
-    if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+    var hidden, visibilityChange;
+    if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
       hidden = "hidden";
       visibilityChange = "visibilitychange";
     } else if (typeof document.msHidden !== "undefined") {
@@ -56,7 +56,7 @@ module.exports = (config) => {
     let defaultTitle = (event) => {
         return 'New Message In ' + event.chat.channel;
     };
-    
+
     let defaultIcon = (event) => {
         return false
     };
@@ -91,7 +91,7 @@ module.exports = (config) => {
         if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
           console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
         } else {
-          // Handle page visibility change   
+          // Handle page visibility change
           document.addEventListener(visibilityChange, handleVisibilityChange, false);
         }
 
@@ -102,7 +102,7 @@ module.exports = (config) => {
                 this.parent.on('message', (event) => {
 
                     if(!isVisible) {
-                        notifyMe(config.title(event), config.icon(event), config.message(event), config.callback);   
+                        notifyMe(config.title(event), config.icon(event), config.message(event), config.callback);
                     }
 
                 });
@@ -113,11 +113,12 @@ module.exports = (config) => {
 
         // attach methods to Chat
         return {
+            namespace: 'desktop-notifications',
             extends: {
                 Chat: extension
             }
         }
 
     }
-    
+
 }

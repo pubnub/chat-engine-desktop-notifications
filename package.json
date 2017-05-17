@@ -2,10 +2,7 @@
   "name": "ocf-desktop-notifications",
   "version": "0.0.1",
   "main": "./plugin.js",
-  "open-chat-framework": {
-    "namespace": "desktop-notifications"
-  },
   "dependencies": {
-    "ocf": "^0.0.2"
+    "ocf": "^0.0.4"
   }
 }
