@@ -70,55 +70,51 @@ module.exports = (config) => {
       return false;
     };
 
-    const plugin = (config) => {
+    config.title = config.title || defaultTitle;
+    config.icon = config.icon || defaultIcon;
+    config.message = config.message || defaultMessage;
+    config.callback = config.callback || defaultCallback;
 
-        config.title = config.title || defaultTitle;
-        config.icon = config.icon || defaultIcon;
-        config.message = config.message || defaultMessage;
-        config.callback = config.callback || defaultCallback;
+    let isVisible = true;
 
-        let isVisible = true;
+    function handleVisibilityChange() {
+      if (document[hidden]) {
+        isVisible = false;
+      } else {
+        isVisible = true;
+      }
+    }
 
-        function handleVisibilityChange() {
-          if (document[hidden]) {
-            isVisible = false;
-          } else {
-            isVisible = true;
-          }
+    // Warn if the browser doesn't support addEventListener or the Page Visibility API
+    if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
+      console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+    } else {
+      // Handle page visibility change
+      document.addEventListener(visibilityChange, handleVisibilityChange, false);
+    }
+
+    class extension {
+
+        construct() {
+
+            this.parent.on('message', (event) => {
+
+                if(!isVisible) {
+                    notifyMe(config.title(event), config.icon(event), config.message(event), config.callback);
+                }
+
+            });
+
         }
 
-        // Warn if the browser doesn't support addEventListener or the Page Visibility API
-        if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
-          console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
-        } else {
-          // Handle page visibility change
-          document.addEventListener(visibilityChange, handleVisibilityChange, false);
+    };
+
+    // attach methods to Chat
+    return {
+        namespace: 'desktop-notifications',
+        extends: {
+            Chat: extension
         }
-
-        class extension {
-
-            construct() {
-
-                this.parent.on('message', (event) => {
-
-                    if(!isVisible) {
-                        notifyMe(config.title(event), config.icon(event), config.message(event), config.callback);
-                    }
-
-                });
-
-            }
-
-        };
-
-        // attach methods to Chat
-        return {
-            namespace: 'desktop-notifications',
-            extends: {
-                Chat: extension
-            }
-        }
-
     }
 
 }
