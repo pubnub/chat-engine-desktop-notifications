@@ -1,3 +1,4 @@
 # Desktop Notifications Plugin
 
-See test.js for an example of usage.
+Show a desktop notification when a message is received
+and app is not in focus.
