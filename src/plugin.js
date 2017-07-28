@@ -1,6 +1,31 @@
-// define our plugin values in root
+/**
+* @module chat-engine-desktop-notifications
+*/
+
 const defaults = {timeout: 1000};
 
+/**
+* @function
+* @ceplugin
+* @param {Object} config The config object
+* @param {Function} config.title The title of the desktop notification
+* @param {module:desktop-notifications~message} config.message [description]
+* @example
+* room.chat.plugin(ChatEngineCore.plugin['chat-engine-desktop-notifications']({
+*     title: (event) => {
+*         return 'Message In ' + room.name
+*     },
+*     message: (event) => {
+*         return event.data.text;
+*     },
+*     icon: (event) => {
+*         return '/examples/flowtron/logo@2x.png';
+*     },
+*     callback: (event) => {
+*         window.focus();
+*     }
+* }));
+*/
 module.exports = (config) => {
 
     // request permission on page load
@@ -34,6 +59,12 @@ module.exports = (config) => {
           body: body || "Hey there! You've been notified!",
         });
 
+
+      /**
+       * Fired when the desktop notification is clicked on by the user.
+       * @callback callback
+       * @param {Object} event
+       */
         lastNotification.onclick = callback;
 
       }
@@ -100,7 +131,25 @@ module.exports = (config) => {
             this.parent.on('message', (event) => {
 
                 if(!isVisible) {
-                    notifyMe(config.title(event), config.icon(event), config.message(event), config.callback);
+
+                /**
+                 * Provides a template function to generate a notification title.
+                 * @callback title
+                 * @param {Object} title
+                 */
+
+                /**
+                 * Provides a template function to generate a notification icon.
+                 * @callback icon
+                 * @param {Object} event
+                 */
+
+                /**
+                 * Provides a template function to generate a notification message.
+                 * @callback message
+                 * @param {Object} event
+                 */
+                  notifyMe(config.title(event), config.icon(event), config.message(event), config.callback);
                 }
 
             });
