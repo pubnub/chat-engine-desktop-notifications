@@ -1,4 +1,6 @@
 /**
+* Fires a Notification via the [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/notification)
+* whenever a message is received in the supplied {@link Chat}.
 * @module chat-engine-desktop-notifications
 */
 
@@ -8,8 +10,11 @@ const defaults = {timeout: 1000};
 * @function
 * @ceplugin
 * @param {Object} config The config object
-* @param {Function} config.title The title of the desktop notification
-* @param {module:desktop-notifications~message} config.message [description]
+* @param {String} [config.event="message"] The event that will trigger a desktop notification
+* @param {module:chat-engine-desktop-notifications~title} config.title A function that returns title of the notification.
+* @param {module:chat-engine-desktop-notifications~message} config.message A function that returns the notification message.
+* @param {module:chat-engine-desktop-notifications~icon} config.icon A function that returns link to an image to use for the notification icon.
+* @param {module:chat-engine-desktop-notifications~callback} config.callback A function to call when the notification is clicked.
 * @example
 * room.chat.plugin(ChatEngineCore.plugin['chat-engine-desktop-notifications']({
 *     title: (event) => {
@@ -26,7 +31,7 @@ const defaults = {timeout: 1000};
 *     }
 * }));
 */
-module.exports = (config) => {
+module.exports = (config = {}) => {
 
     // request permission on page load
     document.addEventListener('DOMContentLoaded', function () {
@@ -101,6 +106,7 @@ module.exports = (config) => {
       return false;
     };
 
+    config.event = config.event || 'message';
     config.title = config.title || defaultTitle;
     config.icon = config.icon || defaultIcon;
     config.message = config.message || defaultMessage;
@@ -128,7 +134,7 @@ module.exports = (config) => {
 
         construct() {
 
-            this.parent.on('message', (event) => {
+            this.parent.on(config.event, (event) => {
 
                 if(!isVisible) {
 
