@@ -58,10 +58,20 @@ By default, the CE desktop notification plugin handles the prompting the user to
 
 <div style="text-align:center"><img src="./example/desktopNotificationsPromtUser0.png" alt="userPrompt" width="200" class="center"></div>
 
-To instatiate this earlier, place the following snippet within your initiliztion code for CE:
+To instantiate this earlier, place the following snippet within your initialization code for CE:
 
 ```
 Notification.requestPermission().then((res) => {
     console.log(res);
 });
 ```
+
+### Example Code
+To see the desktop notifications example in action, add your CE pub/sub keys to '''example/desktop.js''' and then run the following:
+
+```bash
+cd example
+npm install
+http-server 
+```
+Open a supported browser to ```127.0.0.1:8080``` and open the desktop.html file.
