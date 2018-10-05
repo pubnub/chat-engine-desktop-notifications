@@ -1,4 +1,5 @@
 /**
+* @overview Desktop notifications ensure that a message is never missed, even when the app is not in focus. This plugin enables you to fire a desktop notification whenever a message is received in a chat object.
 * Fires a Notification via the [Web Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/notification)
 * whenever a message is received in the supplied {@link Chat}.
 * @module chat-engine-desktop-notifications
