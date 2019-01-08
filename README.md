@@ -75,3 +75,7 @@ npm install
 http-server 
 ```
 Open a supported browser to ```127.0.0.1:8080``` and open the desktop.html file.
+
+## Support
+
+- If you **need help**, have a **general question** a **feature request** or to file a **bug**, contact <support@pubnub.com>
