@@ -1,6 +1,6 @@
 {
   "name": "chat-engine-desktop-notifications",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Ian Jennings",
   "main": "src/plugin.js",
   "dependencies": {
