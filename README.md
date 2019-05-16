@@ -1,3 +1,7 @@
+This repository is a part of the [ChatEngine Framework](https://github.com/pubnub/chat-engine).
+For more information on building chat applications with PubNub, see our
+[Chat Resource Center](http://www.pubnub.com/developers/chat-resource-center/).
+
 # Desktop Notifications Plugin
 
 Show a desktop notification when a message is received
@@ -74,7 +78,7 @@ cd example
 npm install
 http-server 
 ```
-Open a supported browser to ```127.0.0.1:8080``` and open the desktop.html file.
+Open a supported browser to ```127.0.0.1:8080``` and open the ```desktop.html``` file.
 
 ## Support
 
