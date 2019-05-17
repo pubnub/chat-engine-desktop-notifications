@@ -1,6 +1,7 @@
 {
   "name": "chat-engine-desktop-notifications",
   "version": "0.0.7",
+  "license": "SEE LICENSE IN LICENSE",
   "author": "Ian Jennings",
   "main": "src/plugin.js",
   "dependencies": {
